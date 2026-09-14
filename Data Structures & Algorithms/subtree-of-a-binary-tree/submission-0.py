@@ -1,0 +1,25 @@
+class Solution:
+    def isSubtree(self, root, subRoot):
+
+        def sameTree(a, b):
+            if a is None and b is None:
+                return True
+
+            if a is None or b is None:
+                return False
+
+            if a.val != b.val:
+                return False
+
+            return sameTree(a.left, b.left) and sameTree(a.right, b.right)
+
+        if subRoot is None:
+            return True
+
+        if root is None:
+            return False
+
+        if sameTree(root, subRoot):
+            return True
+
+        return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
